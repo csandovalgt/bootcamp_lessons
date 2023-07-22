@@ -34,7 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       backgroundColor: Colors.grey,
       appBar: AppBar(
-        title: const Text("Bootcamp"),
+        title: const Text("Bootcamp S7 M2"),
       ),
       body: SingleChildScrollView(
         child: Column(
