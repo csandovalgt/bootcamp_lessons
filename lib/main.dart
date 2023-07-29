@@ -63,6 +63,70 @@ class _MyHomePageState extends State<MyHomePage> {
 
             Column(
           children: [
+            Center(
+              child: Container(
+                height: 200,
+                width: 200,
+                color: Colors.indigo,
+              ),
+            ),
+            Container(
+                margin: const EdgeInsets.only(left: 10, top: 60),
+                width: 200,
+                height: 400,
+                color: Colors.black87,
+                child: Transform(
+                  transform: Matrix4.identity()
+                    ..setEntry(3, 2, 0.001)
+                    ..rotateY(2),
+                  child: Container(
+                    //puerta
+                    width: 300,
+                    height: 400,
+                    color: Colors.orangeAccent,
+                    alignment: Alignment.centerRight,
+                    padding: EdgeInsets.only(right: 30),
+
+                    child: Container(
+                      // pomo
+                      decoration: BoxDecoration(
+                        color: Colors.deepOrange,
+                        shape: BoxShape.circle,
+                      ),
+                      width: 30,
+                      height: 30,
+                    ),
+                  ),
+                )),
+            /*Transform.rotate(
+                angle: 2,
+                child: Center(
+                  child: Container(
+                    height: 200,
+                    width: 200,
+                    color: Colors.indigo,
+                  ),
+                ),),
+            Transform.translate(offset: Offset(10,0),
+            child: Center(
+              child: Container(
+                height: 200,
+                width: 200,
+                color: Colors.indigo,
+              ),
+            ),),
+            Transform.scale(
+              //scale: 1,
+              scaleY: 0.2,
+              child:Center(
+                child: Container(
+                  height: 200,
+                  width: 200,
+                  color: Colors.yellow,
+                ),
+              ),
+            ),*/
+
             /*Image.network(
               'https://docs.flutter.dev/assets/images/dash/Dash.png',
               width: 250,
@@ -138,7 +202,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
             SizedBox(
               height: 20,
-            ),*/
+            ),
+
             SizedBox(
               height: 20,
             ),
@@ -151,7 +216,40 @@ class _MyHomePageState extends State<MyHomePage> {
                   // color: Colors.white,
                 ),
               ),
-            ), /*
+            ),
+            ClipPath(
+              clipper: DashClipper(),
+              child: Image.network(
+                'https://docs.flutter.dev/assets/images/dash/Dash.png',
+                width: 250,
+              ),
+            ),
+            Container(
+              height: 100,
+              width: 100,
+              decoration: BoxDecoration(
+                color: Colors.red,
+                border: Border.all(
+                  color: Colors.black,
+                  width: 2,
+                )
+              ),
+            ),
+            DecoratedBox(
+              decoration: BoxDecoration(
+                color: Colors.purple,
+                  border: Border.all(
+                    color: Colors.lightGreenAccent,
+                    width: 2,
+                  )
+              ),
+              child: Container(
+                height: 100,
+                width: 100,
+              ),
+            ),*/
+
+            /*
             Container(
               width: 200,
               height: 100,
@@ -314,6 +412,25 @@ class MyCustomPathClipper extends CustomClipper<Path> {
   }
 }
 
+class DashClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    final pathRombo = Path()
+      ..moveTo(size.width / 2, 0)
+      ..lineTo(size.width, size.height / 2)
+      ..lineTo(size.width / 2, size.height)
+      ..lineTo(0, size.height / 2)
+      ..lineTo(size.width / 2, 0);
+
+    return pathRombo;
+  }
+
+  @override
+  bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
+    return true;
+  }
+}
+
 /// custom painter
 ///
 
@@ -323,7 +440,7 @@ class CustomTrianglePainter extends CustomPainter {
     final paint0 = Paint()
       ..color = Colors.green
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 4;
+      ..strokeWidth = 2;
 
     final path0 = Path()
       ..lineTo(size.width, 0)
@@ -332,20 +449,34 @@ class CustomTrianglePainter extends CustomPainter {
       ..lineTo(0, 0);
 
     canvas.drawPath(path0, paint0);
-    /*
+
     final paint = Paint()
-      ..color = Colors.purple
+      ..color = Colors.blue
+      ..style = PaintingStyle.fill
+      ..strokeWidth = 2;
+
+    final path = Path()
+      ..moveTo(size.width / 2, 0)
+      ..lineTo(size.width, size.height / 2)
+      ..lineTo(size.width / 2, size.height)
+      ..lineTo(0, size.height / 2)
+      ..lineTo(size.width / 2, 0);
+
+    canvas.drawPath(path, paint);
+
+    final paint2 = Paint()
+      ..color = Colors.black
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2;
 
+    final pathRombo = Path()
+      ..moveTo(size.width / 2, 0)
+      ..lineTo(size.width, size.height / 2)
+      ..lineTo(size.width / 2, size.height)
+      ..lineTo(0, size.height / 2)
+      ..lineTo(size.width / 2, 0);
 
-    final path = Path()
-    ..moveTo(0, size.height)
-    ..lineTo(size.width/2, 0)
-    ..lineTo(size.width, size.height)
-    ..lineTo(0, size.height);
-
-    canvas.drawPath(path, paint);*/
+    canvas.drawPath(pathRombo, paint2);
   }
 
   @override
