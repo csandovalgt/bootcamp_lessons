@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 import 'dart:ui';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -35,39 +36,178 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text("Bootcamp S8 M2"),
       ),
       body: SingleChildScrollView(
-        child: Column(
+        child: /*Stack(
           children: [
+            Image.network(
+              'https://docs.flutter.dev/assets/images/dash/Dash.png',
+              width: 250,
+            ),
+            Positioned.fill(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(
+                  sigmaX: 10,
+                  sigmaY: 10,
+                ),
+                child: Container(
+                  color: Colors.transparent,
+                ),
+              ),
+            ),
+          ],
+        ),*/
+
+            Column(
+          children: [
+            /*Image.network(
+              'https://docs.flutter.dev/assets/images/dash/Dash.png',
+              width: 250,
+            ),
+            ClipOval(
+              clipper: OtherCustomClipper(),
+              child: Image.network(
+                'https://docs.flutter.dev/assets/images/dash/Dash.png',
+                width: 250,
+              ),
+            ),
+            ClipRect(
+              clipper: OtherCustomClipper(),
+              child: Image.network(
+                'https://docs.flutter.dev/assets/images/dash/Dash.png',
+                width: 250,
+              ),
+            ),*/
+            /*
+            Container(
+              width: 300,
+              height: 100,
+              color: Colors.blue,
+            ),
+            ClipOval(
+              child: Container(
+                width: 300,
+                height: 100,
+                color: Colors.blue,
+              ),
+            ),*/
+            /*Container(
+              child: Text(
+                "Hola a todos",
+                style: TextStyle(
+                    fontSize: 40, color: Colors.black.withOpacity(0.4)),
+              ),
+            ),
+            Opacity(
+              opacity: 0.5,
+              child: Container(
+                height: 200,
+                width: 200,
+                color: Colors.blue,
+              ),
+            ),
+            Container(
+              height: 200,
+              width: 200,
+              decoration: BoxDecoration(
+                  color: Colors.blue.withOpacity(0.5),
+                borderRadius: BorderRadius.circular(40)
+              ),
+            ),
+            Opacity(
+              opacity: 0.2,
+              child: Text(
+                "Hola a todos",
+                style: TextStyle(
+                  fontSize: 40,
+                ),
+              ),
+            ),
+            RotatedBox(
+              quarterTurns: 8,
+              child: Image.network(
+                'https://docs.flutter.dev/assets/images/dash/Dash.png',
+                width: 250,
+              ),
+            ),
+
+
+
+            SizedBox(
+              height: 20,
+            ),*/
             SizedBox(
               height: 20,
             ),
             Center(
               child: CustomPaint(
-                painter: MyCustomPainter(),
+                painter: CustomTrianglePainter(),
                 child: Container(
+                  width: 300,
+                  height: 300,
+                  // color: Colors.white,
+                ),
+              ),
+            ), /*
+            Container(
+              width: 200,
+              height: 100,
+              child: FittedBox(
+                fit: BoxFit.fitWidth,
+                child: Image.network(
+                  'https://docs.flutter.dev/assets/images/dash/Dash.png',
                   width: 200,
                   height: 200,
-                  // color: Colors.white,
                 ),
               ),
             ),
             DecoratedBox(
+              position: DecorationPosition.background,
               decoration: BoxDecoration(
-                color: Colors.red,
-                borderRadius: BorderRadius.circular(
-                  30
-                )
-              ),
-              child: Image.network(
-                'https://docs.flutter.dev/assets/images/dash/Dash.png',
-                width: 200,
-                height: 200,
-              ),
-            )
+                  color: Colors.red, borderRadius: BorderRadius.circular(30)),
+              child: Container(
+                  padding: EdgeInsets.all(20),
+                  child: Image.network(
+                    'https://docs.flutter.dev/assets/images/dash/Dash.png',
+                    width: 200,
+                    height: 200,
+                  ),),
+            ),
+            Container(
+              margin: const EdgeInsets.only(left: 60, top: 60),
+              width: 200,
+              height: 400,
+              color: Colors.black87,
+
+              child: Transform(
+                transform: Matrix4.identity()
+                  ..setEntry(3, 2, 0.001)
+                  ..rotateY(0.7),
+                child: Container( //puerta
+                  width: 300,
+                  height: 400,
+                  color: Colors.orangeAccent,
+                  alignment: Alignment.centerRight,
+                  padding: EdgeInsets.only(right: 30),
+
+                  child: Container( // pomo
+                    decoration: BoxDecoration(
+                      color: Colors.deepOrange,
+                      shape: BoxShape.circle,
+                    ),
+                    width: 30,
+                    height: 30,
+                  ),
+                ),
+              )
+            ),
+            const RotatedBox(
+              quarterTurns: 4,
+              child: Text('Hello World!'),
+            )*/
             /*
             Stack(
               children: [
@@ -117,6 +257,35 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
+/// custom clippers
+class OtherCustomClipper extends CustomClipper<Rect> {
+  @override
+  Rect getClip(Size size) {
+    return Rect.fromLTRB(0, 0, size.width / 3, size.height / 2);
+  }
+
+  @override
+  bool shouldReclip(covariant CustomClipper<Rect> oldClipper) {
+    if (kDebugMode) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+}
+
+class MyOtherCustomClipper extends CustomClipper<Rect> {
+  @override
+  Rect getClip(Size size) {
+    return Rect.fromCenter(center: Offset(100, 100), width: 100, height: 100);
+  }
+
+  @override
+  bool shouldReclip(covariant CustomClipper<Rect> oldClipper) {
+    return true;
+  }
+}
+
 class MyCustomClipper extends CustomClipper<Rect> {
   @override
   Rect getClip(Size size) {
@@ -141,6 +310,46 @@ class MyCustomPathClipper extends CustomClipper<Path> {
 
   @override
   bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
+    return true;
+  }
+}
+
+/// custom painter
+///
+
+class CustomTrianglePainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint0 = Paint()
+      ..color = Colors.green
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 4;
+
+    final path0 = Path()
+      ..lineTo(size.width, 0)
+      ..lineTo(size.width, size.height)
+      ..lineTo(0, size.height)
+      ..lineTo(0, 0);
+
+    canvas.drawPath(path0, paint0);
+    /*
+    final paint = Paint()
+      ..color = Colors.purple
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 2;
+
+
+    final path = Path()
+    ..moveTo(0, size.height)
+    ..lineTo(size.width/2, 0)
+    ..lineTo(size.width, size.height)
+    ..lineTo(0, size.height);
+
+    canvas.drawPath(path, paint);*/
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
     return true;
   }
 }
