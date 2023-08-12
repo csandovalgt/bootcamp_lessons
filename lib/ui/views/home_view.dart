@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:bootcamp_practices/ui/components/components.dart';
 
@@ -7,11 +7,22 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return CustomScaffold(
+      materialAppBar: AppBar(
+        title: const Text("S9 M3"),
+      ),
+      cupertinoAppBar: const CupertinoNavigationBar(
+        middle: Text("S9 M3"),
+      ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: const [
+          Center(
+            child: Text(
+              "Bienvenido, estos son tus últimos posts",
+            ),
+          ),
           CustomButton(),
-
         ],
       ),
     );

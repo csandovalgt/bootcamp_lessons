@@ -7,38 +7,24 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (defaultTargetPlatform == TargetPlatform.android) {
-      return Container(
-        color: Colors.blue,
-        height: 200,
-        width: double.infinity,
-      );
-    } else if (defaultTargetPlatform == TargetPlatform.iOS) {
-      return Container(
+    if (defaultTargetPlatform == TargetPlatform.iOS) {
+      return CupertinoButton(
         color: Colors.green,
-        height: 200,
-        width: double.infinity,
+        child: const Text("Press me on iOS!"),
+        onPressed: () {},
       );
-    }
-    if (defaultTargetPlatform == TargetPlatform.macOS) {
-      if (kIsWeb) {
-        return Container(
-          color: Colors.indigo,
-          height: 200,
-          width: double.infinity,
-        );
-      } else {
-        return Container(
-          color: Colors.yellow,
-          height: 200,
-          width: double.infinity,
-        );
-      }
     } else {
-      return Container(
-        color: Colors.red,
-        height: 200,
-        width: double.infinity,
+      return ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.red,
+        ),
+        onPressed: () {},
+        child: const Text(
+          "Press me on android",
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
       );
     }
   }
