@@ -12,7 +12,7 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   final _formKey = GlobalKey<FormState>();
-  String _name = "";
+  String _profession = "IS";
   bool _isSelected = false;
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _lastnameController = TextEditingController();
@@ -61,7 +61,7 @@ class _HomeViewState extends State<HomeView> {
                         return null;
                       },
                     ),
-                    CustomFormField(
+                    /*CustomFormField(
                       label: "Name",
                       controller: _nameController,
                       prefixIcon: const Icon(
@@ -125,30 +125,73 @@ class _HomeViewState extends State<HomeView> {
                         }
                         return null;
                       },
-                    ),
+                    ),*/
                     RadioListTile(
-                        title: Text("HOmbre"),
-                        value: "Carlos",
-                        groupValue: _name,
+                      activeColor: Colors.green,
+                        title: Text("Soy mayor de edad"),
+                        subtitle: Text("Eres mayor de edad si tienes mas de 18 años "),
+                        value: "IS",
+                        groupValue: _profession,
                         onChanged: (val) {
                           setState(() {
-                            _name = val ?? "";
+                            _profession = val ?? "NAN";
+                          });
+                        }),
+                   /* RadioListTile(
+
+                        title: Text("Ingeniero en Electronica"),
+                        subtitle: Text("profesion numero 2 "),
+                        value: "IE",
+                        groupValue: _profession,
+                        onChanged: (val) {
+                          setState(() {
+                            _profession = val ?? "";
                           });
                         }),
                     RadioListTile(
-                        title: Text("Mujer"),
-                        value: "Sandoval",
-                        groupValue: _name,
+                        activeColor: Colors.yellow,
+                        title: Text("Ingeniero Civil"),
+                        subtitle: Text("profesion numero 3 "),
+                        value: "IC",
+                        groupValue: _profession,
                         onChanged: (val) {
                           setState(() {
-                            _name = val ?? "";
+                            _profession = val ?? "";
                           });
                         }),
+                    RadioListTile(
+                        activeColor: Colors.indigo,
+                        title: Text("Ingeniero Aeronautivo"),
+                        value: "IA",
+                        groupValue: _profession,
+                        onChanged: (val) {
+                          setState(() {
+                            _profession = val ?? "";
+                          });
+                        }),*/
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text("Eres mayor de edad??"),
                         Switch(
+                            activeColor: Colors.red,
+                            inactiveThumbColor: Colors.yellow,
+                            trackColor:
+                                MaterialStateProperty.resolveWith<Color?>(
+                              (Set<MaterialState> states) {
+                                // Track color when the switch is selected.
+                                if (states.contains(MaterialState.selected)) {
+                                  return Colors.amber;
+                                }
+                                if (states.contains(MaterialState.hovered)) {
+                                  return Colors.indigo;
+                                }
+                                // Otherwise return null to set default track color
+                                // for remaining states such as when the switch is
+                                // hovered, focused, or disabled.
+                                return null;
+                              },
+                            ),
                             value: _isSelected,
                             onChanged: (val) {
                               setState(() {
@@ -167,6 +210,7 @@ class _HomeViewState extends State<HomeView> {
                             ),
                           );
                         }
+                        print("my proffesion is:  $_profession");
 
                         /// validaciones manuales
                         /*if (_isSelected) {
