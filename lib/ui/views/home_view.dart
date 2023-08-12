@@ -17,6 +17,7 @@ class _HomeViewState extends State<HomeView> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _lastnameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
   bool isPasswordHidden = true;
   FocusNode _nameFocusNode = FocusNode();
   FocusNode _lastnameFocusNode = FocusNode();
@@ -51,6 +52,15 @@ class _HomeViewState extends State<HomeView> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
+                    Text("Documento de identificacion"),
+                    TextFormField(
+                      validator: (value) {
+                        if (!isValidEmail(value!)) {
+                          return "no es un email valido";
+                        }
+                        return null;
+                      },
+                    ),
                     CustomFormField(
                       label: "Name",
                       controller: _nameController,
@@ -89,14 +99,31 @@ class _HomeViewState extends State<HomeView> {
                         },
                         child: isPasswordHidden
                             ? Icon(
-                          Icons.remove_red_eye,
-                        )
+                                Icons.remove_red_eye,
+                              )
                             : Icon(
-                          Icons.remove_red_eye_outlined,
-                        ),
+                                Icons.remove_red_eye_outlined,
+                              ),
                       ),
                       onSubmit: (String val) {
                         print("todos los datos completos");
+                      },
+                    ),
+                    CustomFormField(
+                      label: "Phone Number",
+                      controller: _phoneController,
+                      keyboardType: TextInputType.number,
+                      prefixIcon: const Icon(
+                        Icons.account_circle,
+                      ),
+                      onSubmit: (String val) {
+                        _passwordFocusNode.requestFocus();
+                      },
+                      validator: (value) {
+                        if (!isValidEmail(value!)) {
+                          return "no es un email valido";
+                        }
+                        return null;
                       },
                     ),
                     RadioListTile(
@@ -117,25 +144,44 @@ class _HomeViewState extends State<HomeView> {
                             _name = val ?? "";
                           });
                         }),
-                    Switch(
-                        value: _isSelected,
-                        onChanged: (val) {
-                          setState(() {
-                            _isSelected = val;
-                          });
-                        }),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("Eres mayor de edad??"),
+                        Switch(
+                            value: _isSelected,
+                            onChanged: (val) {
+                              setState(() {
+                                _isSelected = val;
+                              });
+                            }),
+                      ],
+                    ),
                     ElevatedButton(
                       onPressed: () {
-                        /*if (_formKey.currentState!.validate()) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Processing Data'),
-                      ),
-                    );
-                  }*/
-                        // asyncMethod();
+                        /// validación con el formulario
+                        if (_formKey.currentState!.validate()) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Processing Data'),
+                            ),
+                          );
+                        }
 
-                        print(_nameController.value.text);
+                        /// validaciones manuales
+                        /*if (_isSelected) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Bienvenido, eres mayor de edad'),
+                            ),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Lo sentimos, no eres mayor de edad'),
+                            ),
+                          );
+                        }*/
                       },
                       child: const Text('Submit'),
                     ),
@@ -154,5 +200,12 @@ class _HomeViewState extends State<HomeView> {
       print("a todos dos");
     });
     print("a todos");
+  }
+
+  bool isValidEmail(String email) {
+    final RegExp emailRegex = RegExp(
+      r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
+    );
+    return emailRegex.hasMatch(email);
   }
 }

@@ -8,7 +8,10 @@ class CustomFormField extends StatelessWidget {
   final Widget? suffixIcon;
   final FocusNode? focusNode;
   final Function(String) onSubmit;
-  const CustomFormField({Key? key,
+  final TextInputType keyboardType;
+  final String? Function(String?)? validator;
+  const CustomFormField({
+    Key? key,
     required this.controller,
     required this.label,
     this.prefixIcon,
@@ -16,6 +19,8 @@ class CustomFormField extends StatelessWidget {
     this.suffixIcon,
     this.focusNode,
     required this.onSubmit,
+    this.keyboardType = TextInputType.text,
+    this.validator,
   }) : super(key: key);
 
   @override
@@ -26,27 +31,24 @@ class CustomFormField extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Text(
-              label
-          ),
+          Text(label),
           TextFormField(
             focusNode: focusNode,
             controller: controller,
+            keyboardType: keyboardType,
             obscureText: isPassword,
             onFieldSubmitted: (String value) {
               onSubmit(value);
             },
             decoration: InputDecoration(
-              hintText: "Name",
+              hintText: label,
               hintStyle: TextStyle(
                 color: Colors.blue,
               ),
               prefixIcon: prefixIcon,
               suffixIcon: suffixIcon,
             ),
-            validator: (value) {
-              return "soy un mensaje de error";
-            },
+            validator: validator,
           ),
         ],
       ),
