@@ -46,7 +46,9 @@ class _ProfileViewState extends State<ProfileView> {
           ),
           ElevatedButton(
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.of(context).pop(
+                ProfileArguments(name: "Carlos", isAuthenticated: true, age: 23, id: '23232')
+              );
             },
             child: Text("Get back"),
           ),

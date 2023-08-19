@@ -14,6 +14,8 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+
+  String name = "";
   @override
   void initState() {
     // TODO: implement initState
@@ -29,12 +31,47 @@ class _HomeViewState extends State<HomeView> {
       appBar: AppBar(
         title: Text("home view"),
       ),
-      body: Center(
-        child: ElevatedButton(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(name),
+          ElevatedButton(
             onPressed: () async {
               //AppLogic.login("usuario","passwrod", context);
 
+              /// Detiene el procesamiento de Flutter y continua hasta que termine el future
+              ProfileArguments args = await Navigator.pushNamed(
+                context,
+                AppRoutes.profileRoute,
+                arguments: ProfileArguments(
+                  name: "Carlos Sandoval",
+                  age: 20,
+                  id: "dfsdfijj939834",
+                  isAuthenticated: true,
+                ),
+              ) as ProfileArguments;
+              setState(() {
+                name = args.name;
+              });
 
+              /// No Detiene el procesamiento de Flutter, sino que al terminar ejecuta lo que está dentro
+              /// del then
+              /*Navigator.pushNamed(
+                context,
+                AppRoutes.profileRoute,
+                arguments: ProfileArguments(
+                  name: "Carlos Sandoval",
+                  age: 20,
+                  id: "dfsdfijj939834",
+                  isAuthenticated: true,
+                ),
+              ).then((value) {
+                ProfileArguments args = value as ProfileArguments;
+                setState(() {
+                  name = args.name;
+                });
+
+              /// Ejecuta el push sin importar el resultado
               Navigator.pushNamed(
                 context,
                 AppRoutes.profileRoute,
@@ -45,6 +82,12 @@ class _HomeViewState extends State<HomeView> {
                   isAuthenticated: true,
                 ),
               );
+              });*/
+
+
+
+              // llamada a api
+              // otro cálculo
 
               /* bool result = await Navigator.pushNamed(
                 context,
@@ -78,6 +121,7 @@ class _HomeViewState extends State<HomeView> {
 
             },
             child: Text("Go to profile"),),
+        ],
       ),
     );
   }
