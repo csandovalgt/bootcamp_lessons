@@ -7,15 +7,15 @@ class DetailsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Soy Profile View"),
+        title: Text("Pantalla de la publicacion"),
         backgroundColor: Colors.blue,
       ),
       body: Column(
         children: [
           Text("Soy details View"),
           ElevatedButton(onPressed: () {
-
-          }, child: Text("Go  view"),)
+            Navigator.popUntil(context, ModalRoute.withName('/'));
+          }, child: Text("Go  back"),)
         ],
       ),
     );

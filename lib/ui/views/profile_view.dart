@@ -7,23 +7,29 @@ class ProfileView extends StatefulWidget {
     this.userName = "",
   }) : super(key: key);
 
+
   @override
   State<ProfileView> createState() => _ProfileViewState();
 }
 
 class _ProfileViewState extends State<ProfileView> {
+  String name = "";
+
   @override
   void initState() {
     super.initState();
+    //name = EstadoGlobal.getname();
   }
 
   @override
   Widget build(BuildContext context) {
     final ProfileArguments args = ModalRoute.of(context)!.settings.arguments as ProfileArguments;
+    /// segunda forma de acceder a los argumentos
+
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Soy Profile View"),
+        title: Text("Lista de publicaciones"),
         backgroundColor: Colors.indigo,
       ),
       body: Column(
@@ -31,6 +37,7 @@ class _ProfileViewState extends State<ProfileView> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text("Soy profile View y tengo los datos de: ${widget.userName} o ${args.name}"),
+          //Text("Soy profile View y tengo los datos de: ${widget.userName}"),
           ElevatedButton(
             onPressed: () {
               Navigator.pushNamed(context, '/details');
@@ -39,7 +46,7 @@ class _ProfileViewState extends State<ProfileView> {
           ),
           ElevatedButton(
             onPressed: () {
-              Navigator.of(context).pop(true);
+              Navigator.of(context).pop();
             },
             child: Text("Get back"),
           ),
@@ -51,5 +58,14 @@ class _ProfileViewState extends State<ProfileView> {
 
 class ProfileArguments {
   final String name;
-  ProfileArguments({required this.name});
+  final bool isAuthenticated;
+  final int age;
+  final String id;
+
+  ProfileArguments({
+    required this.name,
+    required this.isAuthenticated,
+    required this.age,
+    required this.id,
+  });
 }
