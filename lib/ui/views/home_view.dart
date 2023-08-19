@@ -39,6 +39,8 @@ class _HomeViewState extends State<HomeView> {
             onPressed: () async {
               //AppLogic.login("usuario","passwrod", context);
 
+              //Navigator.popAndPushNamed(context, route)
+
               /// Detiene el procesamiento de Flutter y continua hasta que termine el future
               ProfileArguments args = await Navigator.pushNamed(
                 context,
