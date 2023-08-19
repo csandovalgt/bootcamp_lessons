@@ -1,7 +1,9 @@
 import 'dart:typed_data';
 import 'dart:ui';
 
+import 'package:bootcamp_practices/ui/views/details_view.dart';
 import 'package:bootcamp_practices/ui/views/home_view.dart';
+import 'package:bootcamp_practices/ui/views/profile_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +25,21 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      routes: <String, WidgetBuilder> {
+        '/profile': (BuildContext context) => const ProfileView(),
+        '/details' : (BuildContext context) => const DetailsView(),
+      },
+      onGenerateRoute: (settings) {
+        if (settings.name=='profile') {
+          final ProfileArguments args = settings.arguments as ProfileArguments;
+
+          return MaterialPageRoute(builder: (context) {
+            return ProfileView(
+              userName: args.name,
+            );
+          });
+        }
+      },
     );
 
   }
@@ -42,6 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return const Scaffold(
       backgroundColor: Colors.white,
       body: HomeView(),
+
     );
   }
 }
