@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 import 'dart:ui';
+import 'package:bootcamp_practices/ui/views/explicit_animation.dart';
 import 'package:bootcamp_practices/ui/views/home_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -22,6 +23,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      routes: {
+        '/explicit': (context) => const ExplicitAnamition(),
+      },
     );
 
   }
