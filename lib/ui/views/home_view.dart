@@ -31,6 +31,7 @@ class _HomeViewState extends State<HomeView> {
   Color color = Colors.black.withOpacity(0.5);
   Color containerColor = Colors.indigo;
   double sliderValue = 0;
+  double padding = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -68,11 +69,26 @@ class _HomeViewState extends State<HomeView> {
             ),
           ),*/
 
-          AnimatedContainer(
-            duration: const Duration(milliseconds: 200),
-            width: containerWidth,
-            height: containerHeight,
-            color: containerColor,
+          Stack(
+            children: [
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                width: containerWidth,
+                height: containerHeight,
+                color: containerColor,
+              ),
+              AnimatedPadding(
+                padding: EdgeInsets.symmetric(
+                  vertical: padding,
+                ),
+                duration: const Duration(milliseconds: 200),
+                child: Container(
+                  color: Colors.red,
+                  height: 100,
+                  width: containerWidth,
+                )
+              ),
+            ],
           ),
           /// Ejemplo de animated positioned para mover un contenedor de posición dentro de otro contenedor
           /*Container(
@@ -119,14 +135,14 @@ class _HomeViewState extends State<HomeView> {
                   containerHeight = newVal;
                 });
               }),
-          const Text("Border Radius del contenedor"),
+          const Text("Padding del segundo contenedor"),
           Slider(
               max: 200,
               min: 0,
-              value: containerHeight,
+              value: padding,
               onChanged: (newVal) {
                 setState(() {
-                  containerHeight = newVal;
+                  padding = newVal;
                 });
               }),
           ElevatedButton(
