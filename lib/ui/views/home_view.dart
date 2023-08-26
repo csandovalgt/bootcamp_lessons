@@ -11,20 +11,26 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   String name = "";
+
+  /// Para hacer uso de animate_do
   late AnimationController _controller;
+  bool shouldAnimate = false;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    shouldAnimate = true;
   }
 
+  /// animaciones implicitas
   bool isAnimating = false;
-  double containerHeight = 100;
-  double containerWidth = 200;
+  double containerHeight = 0;
+  double containerWidth = 0;
   double topPos = 0;
   Color color = Colors.black.withOpacity(0.5);
-  double _containerWidth = 100.0;
-  double _containerHeight = 100.0;
+  Color containerColor = Colors.indigo;
+  double sliderValue = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -32,13 +38,12 @@ class _HomeViewState extends State<HomeView> {
       appBar: AppBar(
         leading: BounceInLeft(
           child: InkWell(
-            onTap: () {
-              Navigator.of(context).pushNamed('/explicit');
-            },
-            child: Icon(
-              Icons.menu,
-            )
-          ),
+              onTap: () {
+                Navigator.of(context).pushNamed('/explicit');
+              },
+              child: Icon(
+                Icons.menu,
+              )),
         ),
         title: SlideInDown(
           child: Text("home view"),
@@ -49,39 +54,27 @@ class _HomeViewState extends State<HomeView> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(name),
-          TweenAnimationBuilder(
-            duration: Duration(seconds: 2),
-            tween: Tween<double>(begin: 100.0, end: 200.0),
-            builder: (BuildContext context, double value, Widget? child) {
-              return Container(
-                width: value,
-                height: _containerHeight,
-                color: Colors.blue,
-                child: Center(
-                  child: Text(
-                    'Animated Container',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              );
-            },
-          ),
 
-          /* AnimatedContainer(
-            duration: Duration(milliseconds: 200),
-            width: containerWidth,
-            height: containerHeight,
-            color: Colors.red,
-          ),*/
-          /*BounceInDown(
-            animate: true,
+          /// animate do
+          /* SlideInDown(
+            /// acá asocio el controlador que me retorna el SlideInDown al controlador que cree anteriormente
             controller: (controller) => _controller = controller,
+            duration: Duration(milliseconds: 100),
+            animate: shouldAnimate,
             child: Container(
               height: 200,
               width: 200,
-              color: Colors.red,
+              color: Colors.indigo,
             ),
           ),*/
+
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            width: containerWidth,
+            height: containerHeight,
+            color: containerColor,
+          ),
+          /// Ejemplo de animated positioned para mover un contenedor de posición dentro de otro contenedor
           /*Container(
             height: 300,
             width: double.infinity,
@@ -89,48 +82,88 @@ class _HomeViewState extends State<HomeView> {
             child: Stack(
               children: [
                 AnimatedPositioned(
-                    top: topPos,
-                    left: 0,
-                    right: 0,
+                  top: topPos,
+                  left: 0,
+                  right: 0,
+                  duration: Duration(milliseconds: 200),
+                  child: AnimatedContainer(
                     duration: Duration(milliseconds: 200),
-                    child: AnimatedContainer(
-                      duration: Duration(milliseconds: 200),
-                      color: color,
-                      height: 50,
-                      width: double.infinity,
-                    )
+                    color: color,
+                    height: 50,
+                    width: double.infinity,
+                  ),
                 ),
               ],
-            )
+            ),
           ),*/
+          const SizedBox(
+            height: 30,
+          ),
+          const Text("Ancho del contenedor"),
+          Slider(
+              max: 200,
+              min: 0,
+              value: containerWidth,
+              onChanged: (newVal) {
+                setState(() {
+                  containerWidth = newVal;
+                });
+              }),
+          const Text("Alto del contenedor"),
+          Slider(
+              max: 200,
+              min: 0,
+              value: containerHeight,
+              onChanged: (newVal) {
+                setState(() {
+                  containerHeight = newVal;
+                });
+              }),
+          const Text("Border Radius del contenedor"),
+          Slider(
+              max: 200,
+              min: 0,
+              value: containerHeight,
+              onChanged: (newVal) {
+                setState(() {
+                  containerHeight = newVal;
+                });
+              }),
           ElevatedButton(
             onPressed: () {
+              /// para ejecutar la animación de animate do manualmente
+              /*
+              _controller.reset();
+              _controller.forward();
+              */
+
+              /// Ejemplo de animated positioned para mover un contenedor de posición dentro de otro contenedor
               /*setState(() {
-                if (topPos==0) {
+                if (topPos == 0) {
                   topPos = 50;
                   color = Colors.red.withOpacity(0.5);
-                } else if (topPos==50) {
+                } else if (topPos == 50) {
                   topPos = 100;
                   color = Colors.yellow.withOpacity(0.5);
-                } else if (topPos==100) {
+                } else if (topPos == 100) {
                   topPos = 150;
                   color = Colors.green.withOpacity(0.5);
-                } else if (topPos==150) {
+                } else if (topPos == 150) {
                   topPos = 200;
                 } else {
                   topPos = 0;
                 }
+              });*/
 
-              });
-
-*/
               /*setState(() {
                 if (containerHeight == 200) {
                   containerHeight = 100;
                   containerWidth = 200;
+                  containerColor = Colors.green;
                 } else {
                   containerHeight = 200;
                   containerWidth = 100;
+                  containerColor = Colors.yellow;
                 }
 
               });*/
