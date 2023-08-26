@@ -55,7 +55,6 @@ class _HomeViewState extends State<HomeView> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(name),
-
           /// animate do
           /* SlideInDown(
             /// acá asocio el controlador que me retorna el SlideInDown al controlador que cree anteriormente
@@ -68,7 +67,8 @@ class _HomeViewState extends State<HomeView> {
               color: Colors.indigo,
             ),
           ),*/
-
+          Text("El ancho del contenedor es $containerWidth"),
+          /// código para animaciones implicitas
           Stack(
             children: [
               AnimatedContainer(
