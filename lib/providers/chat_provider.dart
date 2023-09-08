@@ -1,12 +1,4 @@
-import 'package:flutter/cupertino.dart';
-
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../domain/message_model.dart';
 
-class ChatProvider extends ChangeNotifier {
-  List<MessageModel> messages = [];
-
-  Future<void> sendMessage(String text) async {
-    messages.add(MessageModel(text: text, sender: Sender.me));
-    notifyListeners();
-  }
-}
+final messagesProvider = StateProvider<List<MessageModel>>((_) => []);

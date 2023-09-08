@@ -1,28 +1,38 @@
 import 'package:bootcamp_practices/domain/message_model.dart';
-import 'package:bootcamp_practices/providers/chat_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomeView extends StatefulWidget {
+import '../providers/chat_provider.dart';
+
+class HomeView extends ConsumerStatefulWidget {
   const HomeView({Key? key}) : super(key: key);
 
   @override
-  State<HomeView> createState() => _HomeViewState();
+  HomeViewState createState() => HomeViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class HomeViewState extends ConsumerState<HomeView> {
   TextEditingController textEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final messages = ref.watch(messagesProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Chat"),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Text("Enviar"),
+        child: const Text("Enviar"),
         onPressed: () {
-          context.read<ChatProvider>().sendMessage(textEditingController.text);
+          final list = ref.read(messagesProvider);
+
+          list.add(MessageModel(
+            text: textEditingController.text,
+            sender: Sender.me,
+          ));
+
+          ref.read(messagesProvider.notifier).update((state) => [...list]);
           textEditingController.clear();
         },
       ),
@@ -31,20 +41,14 @@ class _HomeViewState extends State<HomeView> {
           children: [
             Expanded(
               child: ListView.builder(
-                  itemCount: context.watch<ChatProvider>().messages.length,
+                  itemCount: messages.length,
                   itemBuilder: (BuildContext context, int index) {
-                    MessageModel message =
-                        context.watch<ChatProvider>().messages[index];
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 12,
-                        horizontal: 12,
-                      ),
-                      child: Container(
-                        height: 100,
-                        width: double.infinity,
-                        color: Colors.indigo.withOpacity(0.20),
-                        child: Text(message.text),
+                    MessageModel message = messages[index];
+                    return Container(
+                      height: 50,
+                      width: double.infinity,
+                      child: Text(
+                        message.text,
                       ),
                     );
                   }),
