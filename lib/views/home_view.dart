@@ -1,8 +1,10 @@
+import 'package:bootcamp_practices/app_settings.dart';
 import 'package:bootcamp_practices/domain/message_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../providers/chat_provider.dart';
+import '../providers/title_provider.dart';
 
 class HomeView extends ConsumerStatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -20,12 +22,12 @@ class HomeViewState extends ConsumerState<HomeView> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Chat"),
+        title: Text(ref.watch(titleProvider)),
       ),
       floatingActionButton: FloatingActionButton(
-        child: const Text("Enviar"),
+        child: Text(AppSettings.send),
         onPressed: () {
-          final list = ref.read(messagesProvider);
+          final List<MessageModel> list = ref.read(messagesProvider);
 
           list.add(MessageModel(
             text: textEditingController.text,
