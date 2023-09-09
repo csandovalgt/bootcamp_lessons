@@ -11,13 +11,13 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   TextEditingController textEditingController = TextEditingController();
-  final ChatController chatController = Get.put(ChatController());
+  final ChatController chatController = Get.put(ChatController(), permanent: true);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Chat"),
+        title: Obx(()=>Text(chatController.title.value)),
       ),
       floatingActionButton: FloatingActionButton(
         child: Text("Enviar"),
