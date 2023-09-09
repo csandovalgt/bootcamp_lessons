@@ -1,4 +1,5 @@
 import 'package:bootcamp_practices/providers/chat_provider.dart';
+import 'package:bootcamp_practices/providers/theme_provider.dart';
 import 'package:bootcamp_practices/views/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +16,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => ChatProvider())
+        Provider(create: (_) => ChatProvider()),
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
