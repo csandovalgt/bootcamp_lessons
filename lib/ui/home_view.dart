@@ -1,8 +1,9 @@
 import 'package:bootcamp_practices/constants.dart';
-import 'package:bootcamp_practices/models/data_model.dart';
+import 'package:bootcamp_practices/ui/mixin.dart';
+import 'package:bootcamp_practices/ui/string_mixin.dart';
+import 'package:bootcamp_practices/ui/ui_utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:bootcamp_practices/data_sources/remote/http_client.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -12,30 +13,10 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  late Client httpClient;
-  bool isProcessing = false;
-
+class _MyHomePageState extends State<MyHomePage> with UtilsMixin, StringUtilsMixin {
   @override
   void initState() {
     super.initState();
-    httpClient = Client();
-  }
-
-  getInfo() async {
-    setState(() {
-      isProcessing = true;
-    });
-    MyResponse myResponse = await httpClient.get(path: 'name');
-    setState(() {
-      isProcessing = false;
-    });
-    if (myResponse.response != null) {
-      if (kDebugMode) {
-        DataModel myData = DataModel.fromJson(myResponse.response!.data);
-        print(myData.message);
-      }
-    }
   }
 
   @override
@@ -49,15 +30,14 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+
           ElevatedButton(
-            onPressed: isProcessing
-                ? null
-                : () async {
-                    getInfo();
-                  },
-            child: isProcessing
-                ? const CircularProgressIndicator()
-                : const Text("Click me"),
+            onPressed: () {
+
+              print(cuadrado(val: 3));
+              print(capitalize("value"));
+            },
+            child: Text("Click me"),
           ),
         ],
       ),
