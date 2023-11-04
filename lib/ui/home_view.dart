@@ -13,7 +13,8 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> with UtilsMixin, StringUtilsMixin {
+class _MyHomePageState extends State<MyHomePage>
+    with UtilsMixin, StringUtilsMixin {
   @override
   void initState() {
     super.initState();
@@ -24,16 +25,14 @@ class _MyHomePageState extends State<MyHomePage> with UtilsMixin, StringUtilsMix
     return Scaffold(
       backgroundColor: Colors.grey,
       appBar: AppBar(
-        title: const Text("Bootcamp"),
+        title: Text(widget.title),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-
           ElevatedButton(
             onPressed: () {
-
               print(cuadrado(val: 3));
               print(capitalize("value"));
             },
