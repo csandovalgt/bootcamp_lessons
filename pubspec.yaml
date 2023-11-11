@@ -38,6 +38,10 @@ dependencies:
   cupertino_icons: ^1.0.2
   dio:
   json_annotation:
+  calculator:
+    git:
+      url: https://github.com/csandovalgt/calculator.git
+      ref: master
 
 dev_dependencies:
   json_serializable: ^6.7.1

@@ -4,6 +4,7 @@ import 'package:bootcamp_practices/ui/string_mixin.dart';
 import 'package:bootcamp_practices/ui/ui_utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:calculator/calculator.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -33,8 +34,7 @@ class _MyHomePageState extends State<MyHomePage>
         children: [
           ElevatedButton(
             onPressed: () {
-              print(cuadrado(val: 3));
-              print(capitalize("value"));
+              print(suma(3,3));
             },
             child: Text("Click me"),
           ),
