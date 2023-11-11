@@ -60,6 +60,22 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+
+    flavorDimensions "default"
+
+    productFlavors {
+        empresaA {
+            dimension "default"
+            resValue "string", "app_name", "EmpresaA Cupones"
+            applicationId "com.cupones.empresaa"
+        }
+
+        empresaB {
+            dimension "default"
+            resValue "string", "app_name", "EmpresaB Cupones"
+            applicationId "com.cupones.empresab"
+        }
+    }
 }
 
 flutter {
