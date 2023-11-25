@@ -45,6 +45,4 @@ class Math {
   static bool isTheSame({required int a, int b = 4}) {
     return a == b;
   }
-
-
 }

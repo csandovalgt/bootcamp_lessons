@@ -1,4 +1,5 @@
 import 'package:bootcamp_practices/ui/home_view.dart';
+import 'package:bootcamp_practices/ui/main_view.dart';
 import 'package:bootcamp_practices/ui/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -17,9 +18,7 @@ class MyApp extends StatelessWidget {
       theme: UITheme.getTheme(
         const String.fromEnvironment('EMPRESA'),
       ),
-      home: MyHomePage(
-          title:
-              'Bienvenido a ${UITheme.getName(const String.fromEnvironment('EMPRESA'))}'),
+      home: MainView(),
     );
   }
 }

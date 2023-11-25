@@ -4,7 +4,6 @@ class UITheme {
   static String empresaAName = "Empresa A";
   static String empresaBName = "Empresa B";
 
-
   static String empresaALogo = "assets/empresaA/logo.png";
   static String empresaBLogo = "assets/empresaB/logo.png";
   static ThemeData empresaATheme = ThemeData(
@@ -30,7 +29,7 @@ class UITheme {
   );
 
   static String getLogoPath(String empresa) {
-    if (empresa=="A") {
+    if (empresa == "A") {
       return empresaALogo;
     } else {
       return empresaBLogo;
@@ -38,7 +37,7 @@ class UITheme {
   }
 
   static ThemeData getTheme(String empresa) {
-    if (empresa=="A") {
+    if (empresa == "A") {
       return empresaATheme;
     } else {
       return empresaBTheme;
@@ -46,7 +45,7 @@ class UITheme {
   }
 
   static String getName(String empresa) {
-    if (empresa=="A") {
+    if (empresa == "A") {
       return empresaAName;
     } else {
       return empresaBName;

@@ -31,7 +31,8 @@ class _MyHomePageState extends State<MyHomePage>
     estudiantes = [
       Estudiante(id: '1', name: 'Mario', lastName: 'Martinez'),
       Estudiante(id: '2', name: 'Maria', lastName: 'Perez'),
-      Estudiante(id: '3', name: 'Lucia', lastName: 'Rodriguez')
+      Estudiante(id: '3', name: 'Lucia', lastName: 'Rodriguez'),
+      mario,
     ];
   }
 
@@ -70,6 +71,34 @@ class _MyHomePageState extends State<MyHomePage>
                         .toString()),
                   );
                 }),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              setState(() {
+                /// para eliminar elementos de la lista
+                /*
+                estudiantes.remove(mario);
+                estudiantes.removeAt(0);*/
+
+                /// para eliminar todos los elementos de la lista
+                //estudiantes.clear();
+
+                /// para revertir el orden de mi lista
+                //estudiantes = estudiantes.reversed.toList();
+
+                /// instrucciones equivalentes
+                Estudiante? filtrado = estudiantes
+                    .where((element) => element.id == '22')
+                    .toList()
+                    .firstOrNull;
+                Estudiante filtradov2 =
+                    estudiantes.firstWhere((element) => element.id == '22');
+
+                ///
+                //estudiantes.contains(element);
+              });
+            },
+            child: Text("Agrega elemento"),
           ),
           /*Expanded(
             child: ListView.builder(
@@ -113,7 +142,7 @@ class _MyHomePageState extends State<MyHomePage>
               }*/
 
               /// list[indice] me retorna el valor en ese indice
-              /*print(list);
+              /*print(list[0]);
 
               int myIndex = list.indexOf(31);
               if (myIndex >= 0) {
