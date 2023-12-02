@@ -115,12 +115,21 @@ class Joven extends Humano with Test implements UtilidadesPersonas  {
     print("zzz");
   }
 
+  @override
+  decirHola() {
+    print("hola soy joven");
+  }
+
 }
 
 class UtilidadesPersonas {
-
+  decirHola() {
+    print("hola");
+  }
 }
 
 mixin Test {
-
+  echo() {
+    print("echo");
+  }
 }

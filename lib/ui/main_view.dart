@@ -46,6 +46,9 @@ class _MainViewState extends State<MainView> {
 
             Humano yo = Adulto();
 
+            Joven joven = Joven();
+            joven.echo();
+
 
           },
           child: Text("Press me"),
