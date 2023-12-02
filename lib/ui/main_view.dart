@@ -1,3 +1,4 @@
+import 'package:bootcamp_practices/poo/dog.dart';
 import 'package:flutter/material.dart';
 
 class MainView extends StatefulWidget {
@@ -8,15 +9,13 @@ class MainView extends StatefulWidget {
 }
 
 class _MainViewState extends State<MainView> {
-  List<String> questions = [
-    '¿Cuál es tu color favorito?', // Ejemplo de pregunta
-    '¿Cuál es tu comida preferida?', // Ejemplo de pregunta
-    '¿Cuál es tu película favorita?', // Ejemplo de pregunta
-    '¿Cuál es tu destino de viaje soñado?', // Ejemplo de pregunta
-    '¿Cuál es tu libro favorito?', // Ejemplo de pregunta
-  ];
+  late Dog myDog;
 
-  List<String> selected = [];
+  @override
+  void initState() {
+    super.initState();
+    myDog = Dog(longHair: true, color: Colors.black);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,60 +24,32 @@ class _MainViewState extends State<MainView> {
       appBar: AppBar(
         backgroundColor: Colors.black87,
         title: const Text("Preguntas y respuestas"),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(
-              right: 16,
-            ),
-            child: InkWell(
-              onTap: () {
-                setState(() {});
-              },
-              child: const Icon(
-                Icons.check,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(
-              right: 16,
-            ),
-            child: InkWell(
-              onTap: () {
-                setState(() {
-                  selected.clear();
-                });
-              },
-              child: const Icon(
-                Icons.clear,
-              ),
-            ),
-          ),
-        ],
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-                itemCount: questions.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return CheckboxListTile(
-                    value: selected.contains(questions[index]),
-                    onChanged: (value) {
-                      setState(() {
-                        if (selected.contains(questions[index])) {
-                          selected.remove(questions[index]);
-                        } else {
-                          selected.add(questions[index]);
-                        }
-                      });
-                    },
-                    title: Text(questions[index]),
-                  );
-                }),
-          ),
-          Text("Longitud de la lista:  ${selected.length}"),
-        ],
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+
+
+            myDog.bark();
+            print(myDog.estaLleno());
+            myDog.comer();
+            print(myDog.estaLleno());
+
+            myDog.enfermar = true;
+            print(myDog.estaEnfermo);
+
+            Dog myGolden = GolderRetriever(longHair: true, color: Colors.red);
+            myGolden.bark();
+
+            Dog myShihtzu = ShihTzu(longHair: true, color: Colors.brown);
+            myShihtzu.bark();
+
+            Humano yo = Adulto();
+
+
+          },
+          child: Text("Press me"),
+        ),
       ),
     );
   }
